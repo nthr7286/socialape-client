@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
 import Card from '@material-ui/core/Card'
 import { makeStyles } from '@material-ui/core/styles'
 import CardActionArea from '@material-ui/core/CardActionArea'
@@ -23,7 +26,9 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+
 export default props => {
+  dayjs.extend(relativeTime)
   const classes = useStyles()
   const { scream: {
     body,
@@ -47,9 +52,20 @@ export default props => {
           component={Link}
           to={`/users/${userHandle}`}
           color="primary"
-        >{userHandle}</Typography>
-        <Typography variant="body2" color="textSecondary">{createdAt}</Typography>
-        <Typography variant="body1">{body}</Typography>
+          children={userHandle}
+        />
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          children={
+            dayjs(createdAt)
+            .fromNow()
+          }
+        />
+        <Typography
+          variant="body1"
+          children={body}
+        />
       </CardContent>
     </Card>
   )
