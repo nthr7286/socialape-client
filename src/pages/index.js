@@ -1,5 +1,5 @@
 import home from './home'
-import login from './login'
-import signup from './signup'
+import Login from './login'
+import Signup from './signup'
 
-export { home, login, signup }
+export { home, Login, Signup }

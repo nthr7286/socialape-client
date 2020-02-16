@@ -60,10 +60,14 @@ export default props => {
     axios.post('./login', userData)
       .then(res => {
         console.log(res.data)
+        localStorage.setItem(
+          'FBIdToken', `Bearer ${res.data.token}`
+        )
         setState({
           ...state,
           loading: false
         })
+        console.log(props)
         props.history.push('/')
       })
       .catch(err => {
